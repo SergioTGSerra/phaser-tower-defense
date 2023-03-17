@@ -4,6 +4,8 @@
 
 #### By _**Stuart Gill, Alex Williams, Kenny Wolfenberger, and James Cho**_
 
+#### Modified By _**Sérgio Serra and Pedro Silva**_
+
 ## Description
 
 Tower Defense game built using Javascript and the phaser.js library.
