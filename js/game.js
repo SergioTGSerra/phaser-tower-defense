@@ -90,20 +90,20 @@ var map =  [[  0, 0, 0, 0, -1, -1, -1, -1, -1,  0, -1, -1, -1, -1,  0,  0,  0,  
 function preload() {    
     // load images
     this.load.image('mapOne', 'assets/updatedMap.png');
-    this.load.image('bullet', 'assets/bullet.png');
-    this.load.image('arrow', 'assets/arrow.png');
-    this.load.image('tower', 'assets/tower.png');
-    this.load.image('tower2', 'assets/tower2.png');
-    this.load.image('tower3', 'assets/fastTower.png');
-    this.load.image('enemy', 'assets/enemy.gif');
-    this.load.image('robert', 'assets/robert1.png');
-    this.load.image('dragon', 'assets/dragon.png');
-    this.load.image('towerOneButton', 'assets/towerOneButton.png');
-    this.load.image('towerTwoButton', 'assets/towerTwoButton.png');
-    this.load.image('towerThreeButton', 'assets/fastTowerButton.png');
-    this.load.image('uibar', 'assets/bottombar.jpg');
-    this.load.image('startButton', 'assets/title.png');
-    this.load.image('gameOver', 'assets/gameover.jpg');
+    this.load.image('bullet', 'new_assets/pea.png');
+    this.load.image('arrow', 'new_assets/spike.png');
+    this.load.image('tower', 'new_assets/pea.png');
+    this.load.image('tower2', 'new_assets/cattail.png');
+    this.load.image('tower3', 'new_assets/superpea.png');
+    this.load.image('enemy', 'new_assets/zombie.png');
+    this.load.image('robert', 'new_assets/zombie2.png');
+    this.load.image('dragon', 'new_assets/zombie3.png');
+    this.load.image('towerOneButton', 'new_assets/peaButton.png');
+    this.load.image('towerTwoButton', 'new_assets/cattailButton.png');
+    this.load.image('towerThreeButton', 'new_assets/superpeaButton.png');
+    this.load.image('uibar', 'new_assets/Rectangle.png');
+    this.load.image('startButton', 'new_assets/titlescreen.png');
+    this.load.image('gameOver', 'new_assets/Gameover.png');
     this.load.image('upgrade', 'assets/upgradeButton.png');
     
     // load audio
