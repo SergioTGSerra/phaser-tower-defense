@@ -90,7 +90,7 @@ var map =  [[  0, 0, 0, 0, -1, -1, -1, -1, -1,  0, -1, -1, -1, -1,  0,  0,  0,  
 function preload() {    
     // load images
     this.load.image('mapOne', 'assets/updatedMap.png');
-    this.load.image('bullet', 'new_assets/pea.png');
+    this.load.image('bullet', 'new_assets/peashot.png');
     this.load.image('arrow', 'new_assets/spike.png');
     this.load.image('tower', 'new_assets/pea.png');
     this.load.image('tower2', 'new_assets/cattail.png');
