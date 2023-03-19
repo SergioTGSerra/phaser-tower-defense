@@ -90,20 +90,21 @@ var map =  [[  0, 0, 0, 0, -1, -1, -1, -1, -1,  0, -1, -1, -1, -1,  0,  0,  0,  
 function preload() {    
     // load images
     this.load.image('mapOne', 'assets/updatedMap.png');
-    this.load.image('bullet', 'new_assets/peashot.png');
-    this.load.image('arrow', 'new_assets/spike.png');
-    this.load.image('tower', 'new_assets/pea.png');
-    this.load.image('tower2', 'new_assets/cattail.png');
-    this.load.image('tower3', 'new_assets/superpea.png');
-    this.load.image('enemy', 'new_assets/zombie.png');
-    this.load.image('robert', 'new_assets/zombie2.png');
-    this.load.image('dragon', 'new_assets/zombie3.png');
-    this.load.image('towerOneButton', 'new_assets/peaButton.png');
-    this.load.image('towerTwoButton', 'new_assets/cattailButton.png');
-    this.load.image('towerThreeButton', 'new_assets/superpeaButton.png');
-    this.load.image('uibar', 'new_assets/Rectangle.png');
-    this.load.image('startButton', 'new_assets/titlescreen.png');
-    this.load.image('gameOver', 'new_assets/Gameover.png');
+    this.load.image('mapTwo', 'assets/updatedMap_1.png');
+    this.load.image('bullet', 'assets/peashot.png');
+    this.load.image('arrow', 'assets/spike.png');
+    this.load.image('tower', 'assets/pea.png');
+    this.load.image('tower2', 'assets/cattail.png');
+    this.load.image('tower3', 'assets/superpea.png');
+    this.load.image('enemy', 'assets/zombie.png');
+    this.load.image('robert', 'assets/zombie2.png');
+    this.load.image('dragon', 'assets/zombie3.png');
+    this.load.image('towerOneButton', 'assets/peaButton.png');
+    this.load.image('towerTwoButton', 'assets/cattailButton.png');
+    this.load.image('towerThreeButton', 'assets/superpeaButton.png');
+    this.load.image('uibar', 'assets/Rectangle.png');
+    this.load.image('startButton', 'assets/titlescreen.png');
+    this.load.image('gameOver', 'assets/Gameover.png');
     this.load.image('upgrade', 'assets/upgradeButton.png');
     
     // load audio
@@ -457,23 +458,6 @@ function update(time, delta) {
 
     level = Math.ceil(time/40000);
     levelText.setText("Level: " + level);
-
-    this.input.keyboard.on('keydown_A', function(event) {
-        turretButton = true;
-        turret2Button = false;
-        turret3Button = false;
-      });
-      this.input.keyboard.on('keydown_S', function(event) {
-        turret2Button = true;
-        turretButton = false;
-        turret3Button = false;
-      });
-      this.input.keyboard.on('keydown_D', function(event) {
-        turret3Button = true;
-        turretButton = false;
-        turret2Button = false;
-
-      });
 
 
     endGame();
