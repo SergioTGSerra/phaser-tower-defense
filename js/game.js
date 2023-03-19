@@ -373,7 +373,9 @@ function drawGrid(graphics) {
    
 }
 
-function update(time, delta) { 
+function update(time, delta) {
+
+    //Se as vidas acabarem gameover = true entra no if
    
     if(gameOver) {
         const gameOverButton = this.add.image(700, 400, 'gameOver');
@@ -386,7 +388,8 @@ function update(time, delta) {
         return;
         })
     }
-    
+
+    //Essas 3 funcoes gera os 3 inimigosc conforme o tempo    
 
     if (time > this.nextEnemy &&  startgame ===true)
     {
@@ -436,6 +439,7 @@ function update(time, delta) {
         }
     }
     
+    //Estes 3 for's se o enimigo estiver com a propriedade ativa = false remove do array para melhorar o desempenho
 
     for (var i=0; i < enemies.children.entries.length; i++) {
         if (enemies.children.entries[i].active === false) {
@@ -456,47 +460,29 @@ function update(time, delta) {
     }
 
 
-    level = Math.ceil(time/40000);
+    //Define o nivel do jogo
+    level = Math.ceil(time/30000);
     levelText.setText("Level: " + level);
 
 
-    endGame();
+    if (life <= 0 ) gameOver = true;
 }
+
+
+//Estas 3 funções abaixo são chamdas no ficheiro turrets.js
 
 function canPlaceTurret(i, j) {
     return map[i][j] === 0;
 }
 
 
-
 function addBullet(x, y, angle) {
     var bullet = bullets.get();
-    if (bullet)
-    {
-        bullet.fire(x, y, angle);
-    }
+    if (bullet) bullet.fire(x, y, angle);
 }
+
 
 function addArrow(x, y, angle) {
     var arrow = arrows.get();
-    if (arrow)
-    {
-        arrow.fire(x, y, angle);
-    }
-}
-
-
-function addFastBullet(x, y, angle) {
-    var fastbullet = fastbullets.get();
-    if (fastbullet)
-    {
-        fastbullet.fire(x, y, angle);
-    }
-}
-
-
-function endGame() {
-    if (life <= 0 ) {
-    gameOver = true;
-    }
+    if (arrow) arrow.fire(x, y, angle);
 }
