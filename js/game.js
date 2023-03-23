@@ -31,6 +31,7 @@ var life = 100;
 var lifeText;
 var startgame = false;
 var gameOver = false;
+var gameWin = false;
 var killCounter;
 var kills = 0;
 var level = 1;
@@ -39,8 +40,6 @@ var bulletSound;
 var arrowSound;
 var fastBulletSound;
 var deathSound;
-var upgrade = 1;
-
 
 
 var ENEMY_SPEED = 1/40000;
@@ -105,7 +104,7 @@ function preload() {
     this.load.image('uibar', 'assets/Rectangle.png');
     this.load.image('startButton', 'assets/titlescreen.png');
     this.load.image('gameOver', 'assets/Gameover.png');
-    this.load.image('upgrade', 'assets/upgradeButton.png');
+    this.load.image('gameWin', 'assets/GameWin.png');
     
     // load audio
     this.load.audio('arrow', '/audio/arrow.mp3');
@@ -119,6 +118,9 @@ function preload() {
 function create() {
     game.scene.pause("main");
     mapOne = this.add.image(800,600, 'mapOne');
+    mapTwo = this.add.image(800,600, 'mapTwo');
+    mapOne.setVisible(true);
+    mapTwo.setVisible(false);
   // this graphics element is only for visualization,
   // its not related to our path
   var graphics = this.add.graphics();
@@ -187,16 +189,6 @@ function create() {
     turretTwoButton.tint = 0xffffff;
     turretOneButton.tint = 0xffffff;});
   this.input.on('pointerdown', placeTurret3);
-  const upgradeButton = this.add.image(400, 1170, 'upgrade');
-  upgradeButton.setInteractive();
-      upgradeButton.on('pointerdown', function() {
-        if (gold >= 2000) {
-          upgrade += 1;
-          gold -= 2000;
-          goldText.setText('Gold: '+ gold);
-        }
-  })
-
   
   bullets = this.physics.add.group({classType: Bullet, runChildUpdate: true});
   arrows = this.physics.add.group({classType: Arrow, runChildUpdate: true});
@@ -241,7 +233,7 @@ function damageEnemyBullet(enemy, bullet) {
     // only if both enemy and bullet are alive
     if (enemy.active === true && bullet.active === true) {
         // we remove the bullet right away
-        var BULLET_DAMAGE = 125 * upgrade;
+        var BULLET_DAMAGE = 125;
         bullet.setActive(false);
         bullet.setVisible(false);    
         
@@ -254,7 +246,7 @@ function damageEnemyArrow(enemy, arrow) {
     // only if both enemy and bullet are alive
     if (enemy.active === true && arrow.active === true) {
         // we remove the bullet right away
-        var ARROW_DAMAGE = 200 * upgrade;
+        var ARROW_DAMAGE = 200;
         arrow.setActive(false);
         arrow.setVisible(false);    
         
@@ -267,7 +259,7 @@ function damageEnemyFastBullet(enemy, fastbullet) {
     // only if both enemy and bullet are alive
     if (enemy.active === true && fastbullet.active === true) {
         // we remove the bullet right away
-        var FASTBULLET_DAMAGE = 70 * upgrade;
+        var FASTBULLET_DAMAGE = 70;
         fastbullet.setActive(false);
         fastbullet.setVisible(false);    
         
@@ -280,7 +272,7 @@ function damageRobertBullet(robert, bullet) {
     // only if both robert and bullet are alive
     if (robert.active === true && bullet.active === true) {
         // we remove the bullet right away
-        var BULLET_DAMAGE = 80 * upgrade;
+        var BULLET_DAMAGE = 80;
         bullet.setActive(false);
         bullet.setVisible(false);    
         
@@ -296,7 +288,7 @@ function damageRobertBullet(robert, bullet) {
     // only if both robert and bullet are alive
     if (robert.active === true && arrow.active === true) {
         // we remove the bullet right away
-        var ARROW_DAMAGE = 350 * upgrade;
+        var ARROW_DAMAGE = 350;
         arrow.setActive(false);
         arrow.setVisible(false);    
         
@@ -310,7 +302,7 @@ function damageRobertFastBullet(robert, fastbullet) {
     // only if both robert and bullet are alive
     if (robert.active === true && fastbullet.active === true) {
         // we remove the bullet right away
-        var FASTBULLET_DAMAGE = 70 * upgrade;
+        var FASTBULLET_DAMAGE = 70;
         fastbullet.setActive(false);
         fastbullet.setVisible(false);    
         
@@ -323,7 +315,7 @@ function damageDragonBullet(dragon, bullet) {
     // only if both robert and bullet are alive
     if (dragon.active === true && bullet.active === true) {
         // we remove the bullet right away
-        var BULLET_DAMAGE = 80 * upgrade;
+        var BULLET_DAMAGE = 80;
         bullet.setActive(false);
         bullet.setVisible(false);    
         
@@ -335,7 +327,7 @@ function damageDragonBullet(dragon, bullet) {
      // only if both robert and bullet are alive
     if (dragon.active === true && arrow.active === true) {
         // we remove the bullet right away
-        var ARROW_DAMAGE = 250 * upgrade;
+        var ARROW_DAMAGE = 250;
         arrow.setActive(false);
         arrow.setVisible(false);    
         
@@ -348,7 +340,7 @@ function damageDragonFastBullet(dragon, fastbullet) {
     // only if both robert and bullet are alive
     if (dragon.active === true && fastbullet.active === true) {
         // we remove the bullet right away
-        var FASTBULLET_DAMAGE = 100 * upgrade;
+        var FASTBULLET_DAMAGE = 100;
         fastbullet.setActive(false);
         fastbullet.setVisible(false);    
         
@@ -387,6 +379,28 @@ function update(time, delta) {
             location.reload();
         return;
         })
+    }
+
+    //Se ganha o jogo aparece mensagem win
+    if(gameWin) {
+        const gameWinButton = this.add.image(700, 400, 'gameWin');
+        mapOne.tint = 0x00ff00;
+        gameWinButton.setInteractive();
+        gameWinButton.on('pointerdown', function() {
+            mapOne.tint = 0x00ff00;
+            gameWinButton.destroy();
+            location.reload();
+        return;
+        })
+    }
+
+    //Se o nivel for superior a 5 muda o mapa para modo noturno
+    if(level%5 == 0){
+        mapOne.setVisible(false);
+        mapTwo.setVisible(true);
+    }else{
+        mapOne.setVisible(true);
+        mapTwo.setVisible(false);
     }
 
     //Essas 3 funcoes gera os 3 inimigosc conforme o tempo    
@@ -461,11 +475,12 @@ function update(time, delta) {
 
 
     //Define o nivel do jogo
-    level = Math.ceil(time/30000);
+    level = Math.ceil(time/300);
     levelText.setText("Level: " + level);
 
 
     if (life <= 0 ) gameOver = true;
+    if (level === 20) gameWin = true;
 }
 
 
