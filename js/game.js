@@ -337,7 +337,7 @@ function damageDragonBullet(dragon, bullet) {
 }
 function damageDragonFastBullet(dragon, fastbullet) {  
 
-    // only if both robert and bullet are alive
+    // only if both robert and bullet are alive 
     if (dragon.active === true && fastbullet.active === true) {
         // we remove the bullet right away
         var FASTBULLET_DAMAGE = 100;
@@ -349,6 +349,7 @@ function damageDragonFastBullet(dragon, fastbullet) {
     }
 }
 
+//Desenha a grelha no ecrã
 function drawGrid(graphics) {
     graphics.lineStyle(1, 0x000000, 0.45);
     for(var i = 0; i < 38; i++) {
@@ -368,9 +369,8 @@ function drawGrid(graphics) {
 function update(time, delta) {
 
     //Se as vidas acabarem gameover = true entra no if
-   
     if(gameOver) {
-        const gameOverButton = this.add.image(700, 400, 'gameOver');
+        const gameOverButton = this.add.image(800, 600, 'gameOver');
         mapOne.tint = 0xbc0505;
         gameOverButton.setInteractive();
         gameOverButton.on('pointerdown', function() {
@@ -383,7 +383,7 @@ function update(time, delta) {
 
     //Se ganha o jogo aparece mensagem win
     if(gameWin) {
-        const gameWinButton = this.add.image(700, 400, 'gameWin');
+        const gameWinButton = this.add.image(800, 600, 'gameWin');
         mapOne.tint = 0x00ff00;
         gameWinButton.setInteractive();
         gameWinButton.on('pointerdown', function() {
@@ -403,7 +403,7 @@ function update(time, delta) {
         mapTwo.setVisible(false);
     }
 
-    //Essas 3 funcoes gera os 3 inimigosc conforme o tempo    
+    //Essas 3 funcoes gera os 3 inimigos conforme o tempo    
 
     if (time > this.nextEnemy &&  startgame ===true)
     {
@@ -478,9 +478,8 @@ function update(time, delta) {
     level = Math.ceil(time/300);
     levelText.setText("Level: " + level);
 
-
     if (life <= 0 ) gameOver = true;
-    if (level === 20) gameWin = true;
+    if (level == 20) gameWin = true;
 }
 
 

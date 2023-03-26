@@ -40,10 +40,16 @@ var Enemy = new Phaser.Class({
     },
     update: function (time, delta)
     {
+        //Se ocorrer GameOver ou GameWin os inimigos deixam de se mover
         if(gameOver){
             
             return;
         }
+        if(gameWin){
+           
+            return;
+        }
+        
         // move the t point along the path, 0 is the start and 0 is the end
         this.follower.t += ENEMY_SPEED * delta;
 
@@ -112,10 +118,16 @@ var Robert = new Phaser.Class({
     },
     update: function (time, delta)
     {
+        //Se ocorrer GameOver ou GameWin os inimigos deixam de se mover
         if(gameOver){
             
             return;
         }
+        if(gameWin){
+           
+            return;
+        }
+
         // move the t point along the path, 0 is the start and 0 is the end
         this.follower.t += ROBERT_SPEED * delta;
 
@@ -176,10 +188,17 @@ var Dragon = new Phaser.Class({
    },
    update: function (time, delta)
    {
+
+        //Se ocorrer GameOver ou GameWin os inimigos deixam de se mover
        if(gameOver){
            
            return;
        }
+       if(gameWin){
+           
+        return;
+       }
+
        // move the t point along the path, 0 is the start and 0 is the end
        this.follower.t += DRAGON_SPEED * delta;
         // get the new x and y coordinates in vec

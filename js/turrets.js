@@ -52,9 +52,10 @@ var Turret = new Phaser.Class({
             this.fire();
             this.nextTic = time + 900;
         }
-        // if(gameOver== true){
-        //     turret.destroy();
-        // }
+         
+        /*if (gameWin){
+            return;
+        }*/
         
     }
 });
@@ -178,9 +179,6 @@ var FastTurret = new Phaser.Class({
             this.fire();
             this.nextTic = time + 100;
         }
-        // if(gameOver== true){
-        //     turret.destroy();
-        // }
         
     }
 });
