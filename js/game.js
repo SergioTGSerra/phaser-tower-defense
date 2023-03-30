@@ -379,7 +379,9 @@ function drawGrid(graphics) {
 }
 
 function update(time, delta) {
-  //if(mapTwo.getVisible())
+  if (!startgame){
+    time = 0;
+  }
 
   //Se as vidas acabarem gameover = true entra no if
   if (gameOver) {
@@ -492,8 +494,10 @@ function update(time, delta) {
   //Cheats
 
   //Define o nivel do jogo
-  level = Math.ceil(time / 5000);
-  levelText.setText("Level: " + level);
+  if(startgame && level < 20 && !gameOver && !gameWin){
+    level = Math.ceil(time / 3000);
+    levelText.setText("Level: " + level);
+  }
 
   if (life <= 0) gameOver = true;
   if (level == 20) gameWin = true;
