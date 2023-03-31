@@ -443,13 +443,14 @@ function update(time, delta) {
       enemy.setActive(true);
       enemy.setVisible(true);
 
-      // place the enemy at the start of the path
+      //coloca o zombieSaco no inicio do caminho
       enemy.startOnPath();
 
       this.nextEnemy = time + 5000 / (1 + 1.2 * level);
     }
   }
 
+  //Cria um zombieGrande se as condições forem verdadeiras
   if (
     time > this.nextRobert &&
     zombieSaco.children.entries.length < 5 &&
@@ -462,13 +463,14 @@ function update(time, delta) {
       robert.setActive(true);
       robert.setVisible(true);
 
-      // place the robert at the start of the path
+      // coloca o zombieSaco no inicio do caminho
       robert.startOnPath();
 
       this.nextRobert = time + 10000 / (1 + 0.7 * kills);
     }
   }
 
+  //Cria um zombieGrande se as condições forem verdadeiras
   if (
     time > this.nextDragon &&
     zombieGrande.children.entries.length < 1 &&
@@ -480,7 +482,7 @@ function update(time, delta) {
     if (dragon) {
       dragon.setActive(true);
       dragon.setVisible(true);
-      // place the robert at the start of the path
+      // coloca o zombieGrande no inicio do caminho
       dragon.startOnPath();
 
       this.nextDragon = time + 10000 / (1 + 0.3 * kills);
@@ -510,7 +512,7 @@ function update(time, delta) {
 
   //Define o nivel do jogo
   if(startgame && level < 20 && !gameOver && !gameWin){
-    level = Math.ceil(time / 3000);
+    level = Math.ceil(time / 30000);
     levelText.setText("Level: " + level);
   }
 
