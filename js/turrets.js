@@ -24,9 +24,9 @@ var Turret = new Phaser.Class({
     
     fire: function() {
         // turret.distance for enemy targeting
-        var enemy = getEnemy(this.x, this.y, 400);
-        var robert = getRobert(this.x, this.y, 300);
-        var dragon = getDragon(this.x, this.y, 300);
+        var enemy = getZombie(this.x, this.y, 400);
+        var robert = getZombieSaco(this.x, this.y, 300);
+        var zombieGrande = getZombieGrande(this.x, this.y, 300);
         if(enemy) {
             var angle = Phaser.Math.Angle.Between(this.x, this.y, enemy.x, enemy.y);
             addBullet(this.x, this.y, angle);
@@ -38,8 +38,8 @@ var Turret = new Phaser.Class({
             addBullet(this.x, this.y, angle);
             this.angle = (angle + Math.PI/2) * Phaser.Math.RAD_TO_DEG;
         }
-        else if(dragon) {
-            var angle = Phaser.Math.Angle.Between(this.x, this.y, dragon.x, dragon.y);
+        else if(zombieGrande) {
+            var angle = Phaser.Math.Angle.Between(this.x, this.y, zombieGrande.x, zombieGrande.y);
             addBullet(this.x, this.y, angle);
             this.angle = (angle + Math.PI/2) * Phaser.Math.RAD_TO_DEG;
         }
@@ -88,12 +88,12 @@ var ArrowTurret = new Phaser.Class({
         // turret.distance for enemy targeting
         
         
-        var enemy = getEnemy(this.x, this.y, 500);
-        var robert = getRobert(this.x, this.y, 700);
-        var dragon = getDragon(this.x, this.y, 600);
+        var enemy = getZombie(this.x, this.y, 500);
+        var robert = getZombieSaco(this.x, this.y, 700);
+        var zombieGrande = getZombieGrande(this.x, this.y, 600);
         
-        if(dragon) {
-            var angle = Phaser.Math.Angle.Between(this.x, this.y, dragon.x, dragon.y);
+        if(zombieGrande) {
+            var angle = Phaser.Math.Angle.Between(this.x, this.y, zombieGrande.x, zombieGrande.y);
             addArrow(this.x, this.y, angle);
             this.angle = (angle + Math.PI/2) * Phaser.Math.RAD_TO_DEG;
         }
@@ -149,12 +149,12 @@ var FastTurret = new Phaser.Class({
     
     fire: function() {
         // turret.distance for enemy targeting
-        var enemy = getEnemy(this.x, this.y, 175);
-        var robert = getRobert(this.x, this.y, 175);
-        var dragon = getDragon(this.x, this.y, 200);
+        var enemy = getZombie(this.x, this.y, 175);
+        var robert = getZombieSaco(this.x, this.y, 175);
+        var zombieGrande = getZombieGrande(this.x, this.y, 200);
 
-        if(dragon) {
-            var angle = Phaser.Math.Angle.Between(this.x, this.y, dragon.x, dragon.y);
+        if(zombieGrande) {
+            var angle = Phaser.Math.Angle.Between(this.x, this.y, zombieGrande.x, zombieGrande.y);
             addBullet(this.x, this.y, angle);
             this.angle = (angle + Math.PI/2) * Phaser.Math.RAD_TO_DEG;
         }
@@ -186,18 +186,18 @@ var FastTurret = new Phaser.Class({
 
 
 
-// aiming turrets at enemies
-function getEnemy(x, y, distance) {
-    var enemyUnits = enemies.getChildren();
+// aiming turrets at zombie
+function getZombie(x, y, distance) {
+    var enemyUnits = zombie.getChildren();
     for(var i = 0; i < enemyUnits.length; i++) {      
         if(enemyUnits[i].active && Phaser.Math.Distance.Between(x, y, enemyUnits[i].x, enemyUnits[i].y) < distance)
             return enemyUnits[i];
     }
     return false;
 } 
-//aiming turrets at roberts
-function getRobert(x, y, distance) {
-    var robertUnits = roberts.getChildren();
+//aiming turrets at zombieSaco
+function getZombieSaco(x, y, distance) {
+    var robertUnits = zombieSaco.getChildren();
     for(var i = 0; i < robertUnits.length; i++) {      
         if(robertUnits[i].active && Phaser.Math.Distance.Between(x, y, robertUnits[i].x, robertUnits[i].y) < distance)
             return robertUnits[i];
@@ -205,9 +205,9 @@ function getRobert(x, y, distance) {
     return false;
 } 
 
-//aiming turrets at dragons
-function getDragon(x, y, distance) {
-    var dragonUnits = dragons.getChildren();
+//aiming turrets at zombieGrande
+function getZombieGrande(x, y, distance) {
+    var dragonUnits = zombieGrande.getChildren();
     for(var i = 0; i < dragonUnits.length; i++) {      
         if(dragonUnits[i].active && Phaser.Math.Distance.Between(x, y, dragonUnits[i].x, dragonUnits[i].y) < distance)
             return dragonUnits[i];

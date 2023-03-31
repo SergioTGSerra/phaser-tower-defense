@@ -1,12 +1,12 @@
-var Enemy = new Phaser.Class({
+var Zombie = new Phaser.Class({
 
     Extends: Phaser.GameObjects.Image,
 
     initialize:
 
-    function Enemy (scene)
+    function Planta (scene)
     {
-        Phaser.GameObjects.Image.call(this, scene, 0, 0, 'enemy');
+        Phaser.GameObjects.Image.call(this, scene, 0, 0, 'zombie');
 
         this.follower = { t: 0, vec: new Phaser.Math.Vector2() };
     },
@@ -15,7 +15,7 @@ var Enemy = new Phaser.Class({
     receiveDamage: function(damage) {
         this.hp -= damage;           
         
-        // if hp drops below 0 we deactivate this enemy
+        // if hp drops below 0 we deactivate this zombie
         if(this.hp <= 0) {
             this.setActive(false);
             this.setVisible(false); 
@@ -35,7 +35,7 @@ var Enemy = new Phaser.Class({
         // get x and y of the given t point
         path.getPoint(this.follower.t, this.follower.vec);
         
-        // set the x and y of our enemy to the received from the previous step
+        // set the x and y of our zombie to the received from the previous step
         this.setPosition(this.follower.vec.x, this.follower.vec.y);            
     },
     update: function (time, delta)
@@ -51,15 +51,15 @@ var Enemy = new Phaser.Class({
         }
         
         // move the t point along the path, 0 is the start and 0 is the end
-        this.follower.t += ENEMY_SPEED * delta;
+        this.follower.t += ZOMBIE_SPEED * delta;
 
         // get the new x and y coordinates in vec
         path.getPoint(this.follower.t, this.follower.vec);
         
-        // update enemy x and y to the newly obtained x and y
+        // update zombie x and y to the newly obtained x and y
         this.setPosition(this.follower.vec.x, this.follower.vec.y);
 
-        // if we have reached the end of the path, remove the enemy
+        // if we have reached the end of the path, remove the zombie
         if (this.follower.t >= 1)
         {
             this.setActive(false);
@@ -74,16 +74,16 @@ var Enemy = new Phaser.Class({
 });
 
 
-var Robert = new Phaser.Class({
+var ZombieSaco = new Phaser.Class({
 
 
     Extends: Phaser.GameObjects.Image,
 
     initialize:
 
-    function Robert (scene)
+    function ZombieSaco (scene)
     {
-        Phaser.GameObjects.Image.call(this, scene, 0, 0, 'robert');
+        Phaser.GameObjects.Image.call(this, scene, 0, 0, 'zombieSaco');
 
         this.follower = { t: 0, vec: new Phaser.Math.Vector2() };
         
@@ -99,13 +99,13 @@ var Robert = new Phaser.Class({
         // get x and y of the given t point
         path.getPoint(this.follower.t, this.follower.vec);
         
-        // set the x and y of our robert to the received from the previous step
+        // set the x and y of our zombieSaco to the received from the previous step
         this.setPosition(this.follower.vec.x, this.follower.vec.y);            
     },
     receiveDamage: function(damage) {
         this.hp -= damage;           
         
-        // if hp drops below 0 we deactivate this robert
+        // if hp drops below 0 we deactivate this zombieSaco
         if(this.hp <= 0) {
             this.setActive(false);
             this.setVisible(false); 
@@ -129,15 +129,15 @@ var Robert = new Phaser.Class({
         }
 
         // move the t point along the path, 0 is the start and 0 is the end
-        this.follower.t += ROBERT_SPEED * delta;
+        this.follower.t += ZOMBIESACO_SPEED * delta;
 
         // get the new x and y coordinates in vec
         path.getPoint(this.follower.t, this.follower.vec);
         
-        // update robert x and y to the newly obtained x and y
+        // update zombieSaco x and y to the newly obtained x and y
         this.setPosition(this.follower.vec.x, this.follower.vec.y);
 
-        // if we have reached the end of the path, remove the robert
+        // if we have reached the end of the path, remove the zombieSaco
         if (this.follower.t >= 1)
         {
             this.setActive(false);
@@ -151,15 +151,15 @@ var Robert = new Phaser.Class({
 
 });
 
-var Dragon = new Phaser.Class({
+var ZombieGrande = new Phaser.Class({
 
 
 
     Extends: Phaser.GameObjects.Image,
     initialize:
-    function Dragon (scene)
+    function ZombieGrande (scene)
    {
-       Phaser.GameObjects.Image.call(this, scene, 0, 0, 'dragon');
+       Phaser.GameObjects.Image.call(this, scene, 0, 0, 'zombieGrande');
         this.follower = { t: 0, vec: new Phaser.Math.Vector2() };
         
    },
@@ -172,13 +172,13 @@ var Dragon = new Phaser.Class({
        // get x and y of the given t point
        path.getPoint(this.follower.t, this.follower.vec);
        
-       // set the x and y of our robert to the received from the previous step
+       // set the x and y of our zombieSaco to the received from the previous step
        this.setPosition(this.follower.vec.x, this.follower.vec.y);            
    },
    receiveDamage: function(damage) {
        this.hp -= damage;           
        
-       // if hp drops below 0 we deactivate this robert
+       // if hp drops below 0 we deactivate this zombieSaco
        if(this.hp <= 0) {
            this.setActive(false);
            this.setVisible(false); 
@@ -200,13 +200,13 @@ var Dragon = new Phaser.Class({
        }
 
        // move the t point along the path, 0 is the start and 0 is the end
-       this.follower.t += DRAGON_SPEED * delta;
+       this.follower.t += ZOMBIEGRANDE_SPEED * delta;
         // get the new x and y coordinates in vec
        path.getPoint(this.follower.t, this.follower.vec);
        
-       // update robert x and y to the newly obtained x and y
+       // update zombieSaco x and y to the newly obtained x and y
        this.setPosition(this.follower.vec.x, this.follower.vec.y);
-        // if we have reached the end of the path, remove the dragon
+        // if we have reached the end of the path, remove the zombieGrande
        if (this.follower.t >= 1)
        {
            this.setActive(false);

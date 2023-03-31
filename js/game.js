@@ -19,9 +19,9 @@ var game = new Phaser.Game(config);
 var turretSpace = 2;
 var path;
 var turrets;
-var enemies;
-var roberts;
-var dragons;
+var zombie;
+var zombieSaco;
+var zombieGrande;
 var turretButton = false;
 var turret2Button = false;
 var turret3Button = false;
@@ -41,9 +41,9 @@ var arrowSound;
 var fastBulletSound;
 var deathSound;
 
-var ENEMY_SPEED = 1 / 3000;
-var ROBERT_SPEED = 1 / 120000;
-var DRAGON_SPEED = 1 / 160000;
+var ZOMBIE_SPEED = 1 / 30000;
+var ZOMBIESACO_SPEED = 1 / 120000;
+var ZOMBIEGRANDE_SPEED = 1 / 160000;
 
 var map =  [[  0, 0, 0, 0, -1, -1, -1, -1, -1,  0, -1, -1, -1, -1,  0,  0,  0,  0,  0,  0,  0, 0,  0,  0,  0,  0,  0,  0, 0,  0,  0,  0,  0,  0,  0,  0, -1, -1, -1, -1,  0, -1, -1, -1, -1, -1,  0,  0,  0, 0],
             [  0, 0, 0, 0, -1, -1, -1, -1, -1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 0,  0,  0,  0,  0,  0,  0, 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, -1, -1, -1, -1, -1,  0,  0,  0, 0],
@@ -94,9 +94,9 @@ function preload() {
   this.load.image("tower", "assets/pea.png");
   this.load.image("tower2", "assets/cattail.png");
   this.load.image("tower3", "assets/superpea.png");
-  this.load.image("enemy", "assets/zombie.png");
-  this.load.image("robert", "assets/zombie2.png");
-  this.load.image("dragon", "assets/zombie3.png");
+  this.load.image("zombie", "assets/zombie.png");
+  this.load.image("zombieSaco", "assets/zombie2.png");
+  this.load.image("zombieGrande", "assets/zombie3.png");
   this.load.image("towerOneButton", "assets/peaButton.png");
   this.load.image("towerTwoButton", "assets/cattailButton.png");
   this.load.image("towerThreeButton", "assets/superpeaButton.png");
@@ -123,7 +123,7 @@ function create() {
   var graphics = this.add.graphics();
   drawGrid(graphics);
 
-  // the path for our enemies
+  // the path for our zombie
   // parameters are the start x and y of our paths
   path = this.add.path(200, -25);
   path.lineTo(200, 300);
@@ -147,12 +147,12 @@ function create() {
   graphics.lineStyle(3, 0xffffff, 1);
   //visualize the path
 
-  //enemies
-  enemies = this.physics.add.group({ classType: Enemy, runChildUpdate: true });
+  //zombie
+  zombie = this.physics.add.group({ classType: Zombie, runChildUpdate: true });
   this.nextEnemy = 0;
-  roberts = this.physics.add.group({ classType: Robert, runChildUpdate: true });
+  zombieSaco = this.physics.add.group({ classType: ZombieSaco, runChildUpdate: true });
   this.nextRobert = 0;
-  dragons = this.physics.add.group({ classType: Dragon, runChildUpdate: true });
+  zombieGrande = this.physics.add.group({ classType: ZombieGrande, runChildUpdate: true });
   this.nextDragon = 0;
 
   //turrets
@@ -206,15 +206,15 @@ function create() {
     runChildUpdate: true,
   });
 
-  this.physics.add.overlap(enemies, bullets, damageEnemyBullet);
-  this.physics.add.overlap(enemies, arrows, damageEnemyArrow);
-  this.physics.add.overlap(enemies, fastbullets, damageEnemyFastBullet);
-  this.physics.add.overlap(roberts, bullets, damageRobertBullet);
-  this.physics.add.overlap(roberts, arrows, damageRobertArrow);
-  this.physics.add.overlap(roberts, fastbullets, damageRobertFastBullet);
-  this.physics.add.overlap(dragons, bullets, damageDragonBullet);
-  this.physics.add.overlap(dragons, arrows, damageDragonArrow);
-  this.physics.add.overlap(dragons, fastbullets, damageDragonFastBullet);
+  this.physics.add.overlap(zombie, bullets, damageEnemyBullet);
+  this.physics.add.overlap(zombie, arrows, damageEnemyArrow);
+  this.physics.add.overlap(zombie, fastbullets, damageEnemyFastBullet);
+  this.physics.add.overlap(zombieSaco, bullets, damageRobertBullet);
+  this.physics.add.overlap(zombieSaco, arrows, damageRobertArrow);
+  this.physics.add.overlap(zombieSaco, fastbullets, damageRobertFastBullet);
+  this.physics.add.overlap(zombieGrande, bullets, damageDragonBullet);
+  this.physics.add.overlap(zombieGrande, arrows, damageDragonArrow);
+  this.physics.add.overlap(zombieGrande, fastbullets, damageDragonFastBullet);
 
   goldText = this.add.text(700, 1155, "Gold: " + gold, {
     fontSize: "28px",
@@ -437,7 +437,7 @@ function update(time, delta) {
   //Essas 3 funcoes gera os 3 inimigos conforme o tempo
 
   if (time > this.nextEnemy && startgame === true) {
-    var enemy = enemies.get();
+    var enemy = zombie.get();
 
     if (enemy) {
       enemy.setActive(true);
@@ -452,11 +452,11 @@ function update(time, delta) {
 
   if (
     time > this.nextRobert &&
-    roberts.children.entries.length < 5 &&
+    zombieSaco.children.entries.length < 5 &&
     startgame === true &&
     kills > 20
   ) {
-    var robert = roberts.get();
+    var robert = zombieSaco.get();
 
     if (robert) {
       robert.setActive(true);
@@ -471,11 +471,11 @@ function update(time, delta) {
 
   if (
     time > this.nextDragon &&
-    dragons.children.entries.length < 1 &&
+    zombieGrande.children.entries.length < 1 &&
     startgame === true &&
     kills > 400
   ) {
-    var dragon = dragons.get();
+    var dragon = zombieGrande.get();
 
     if (dragon) {
       dragon.setActive(true);
@@ -489,21 +489,21 @@ function update(time, delta) {
 
   //Estes 3 for's se o enimigo estiver com a propriedade ativa = false remove do array para melhorar o desempenho
 
-  for (var i = 0; i < enemies.children.entries.length; i++) {
-    if (enemies.children.entries[i].active === false) {
-      enemies.children.entries.splice(i, 1);
+  for (var i = 0; i < zombie.children.entries.length; i++) {
+    if (zombie.children.entries[i].active === false) {
+      zombie.children.entries.splice(i, 1);
     }
   }
 
-  for (var i = 0; i < roberts.children.entries.length; i++) {
-    if (roberts.children.entries[i].active === false) {
-      roberts.children.entries.splice(i, 1);
+  for (var i = 0; i < zombieSaco.children.entries.length; i++) {
+    if (zombieSaco.children.entries[i].active === false) {
+      zombieSaco.children.entries.splice(i, 1);
     }
   }
 
-  for (var i = 0; i < dragons.children.entries.length; i++) {
-    if (dragons.children.entries[i].active === false) {
-      dragons.children.entries.splice(i, 1);
+  for (var i = 0; i < zombieGrande.children.entries.length; i++) {
+    if (zombieGrande.children.entries[i].active === false) {
+      zombieGrande.children.entries.splice(i, 1);
     }
   }
   
