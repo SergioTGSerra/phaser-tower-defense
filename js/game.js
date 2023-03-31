@@ -245,6 +245,10 @@ function create() {
   arrowSound = this.sound.add("arrow");
   deathSound = this.sound.add("death");
   fastBulletSound = this.sound.add("fastbullet");
+
+  this.mKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M);
+  this.nKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.N);
+
 }
 
 //Damage creep functions
@@ -379,6 +383,18 @@ function drawGrid(graphics) {
 }
 
 function update(time, delta) {
+
+  //Cheats
+  if (Phaser.Input.Keyboard.JustDown(this.mKey)){
+    gold += 1000;
+    goldText.setText('Gold: '+ gold); 
+  }
+
+  if (Phaser.Input.Keyboard.JustDown(this.nKey)){
+    life += 100;
+    lifeText.setText('Life:' + life);
+  }
+
   if (!startgame){
     time = 0;
   }
@@ -490,8 +506,7 @@ function update(time, delta) {
       dragons.children.entries.splice(i, 1);
     }
   }
-
-  //Cheats
+  
 
   //Define o nivel do jogo
   if(startgame && level < 20 && !gameOver && !gameWin){
