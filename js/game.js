@@ -27,7 +27,7 @@ var turret2Button = false;
 var turret3Button = false;
 var gold = 200;
 var goldText;
-var life = 10;
+var life = 100;
 var lifeText;
 var startgame = false;
 var gameOver = false;
@@ -150,11 +150,11 @@ function create() {
 
   //Este código permite que os zombies possão ser usados em deteção de colisões e outros tipos de interações físicas
   zombie = this.physics.add.group({ classType: Zombie, runChildUpdate: true });
-  this.nextEnemy = 0;
+  this.nextZombie = 0;
   zombieSaco = this.physics.add.group({ classType: ZombieSaco, runChildUpdate: true });
-  this.nextRobert = 0;
+  this.nextZombieSaco = 0;
   zombieGrande = this.physics.add.group({ classType: ZombieGrande, runChildUpdate: true });
-  this.nextDragon = 0;
+  this.nextZombieGrande = 0;
 
   //Agrupa cada tipo de planta num grupo para facilitar o melhoramento e a renderização
   turrets = this.add.group({ classType: Turret, runChildUpdate: true });
@@ -257,118 +257,118 @@ function create() {
 
 //Funções de dano nos inimigos
 
-function damageZombieBullet(enemy, bullet) {
+function damageZombieBullet(zombie, bullet) {
   // Apenas se o zombie e a bullet tiverem vivos
-  if (enemy.active === true && bullet.active === true) {
+  if (zombie.active === true && bullet.active === true) {
     // Remove a bullet
     var BULLET_DAMAGE = 125;
     bullet.setActive(false);
     bullet.setVisible(false);
 
     // diminui o dano do zombie com BULLET_DAMAGE
-    enemy.receiveDamage(BULLET_DAMAGE);
+    zombie.receiveDamage(BULLET_DAMAGE);
   }
 }
 
-function damageZombieArrow(enemy, arrow) {
+function damageZombieArrow(zombie, arrow) {
   // Apenas se o zombie e a arrowbullet tiverem vivos
-  if (enemy.active === true && arrow.active === true) {
+  if (zombie.active === true && arrow.active === true) {
     // Remove a Arrowbullet
     var ARROW_DAMAGE = 200;
     arrow.setActive(false);
     arrow.setVisible(false);
 
     //diminui a vida do zombie com ARROW_DAMAGE
-    enemy.receiveDamage(ARROW_DAMAGE);
+    zombie.receiveDamage(ARROW_DAMAGE);
   }
 }
 
-function damageZombieFastBullet(enemy, fastbullet) {
+function damageZombieFastBullet(zombie, fastbullet) {
   // Apenas se o zombie e a fastbullet tiverem vivos
-  if (enemy.active === true && fastbullet.active === true) {
+  if (zombie.active === true && fastbullet.active === true) {
     /// Remove a Fastbullet 
     var FASTBULLET_DAMAGE = 70;
     fastbullet.setActive(false);
     fastbullet.setVisible(false);
 
     // diminui a vida do zombie com BULLET_DAMAGE
-    enemy.receiveDamage(FASTBULLET_DAMAGE);
+    zombie.receiveDamage(FASTBULLET_DAMAGE);
   }
 }
 
-function damageZombieSacoBullet(robert, bullet) {
+function damageZombieSacoBullet(zombieSaco, bullet) {
   // Apenas se o zombieSaco e a bullet tiverem vivos
-  if (robert.active === true && bullet.active === true) {
+  if (zombieSaco.active === true && bullet.active === true) {
     // Remove a bullet
     var BULLET_DAMAGE = 80;
     bullet.setActive(false);
     bullet.setVisible(false);
 
     // diminui a vida do zombieSaco com BULLET_DAMAGE
-    robert.receiveDamage(BULLET_DAMAGE);
+    zombieSaco.receiveDamage(BULLET_DAMAGE);
   }
 }
 
-function damageZombieSacoArrow(robert, arrow) {
+function damageZombieSacoArrow(zombieSaco, arrow) {
   // Apenas se o zombieSaco e  a arrowbullet tiverem vivos
-  if (robert.active === true && arrow.active === true) {
+  if (zombieSaco.active === true && arrow.active === true) {
     // Remove a Arrowbullet
     var ARROW_DAMAGE = 350;
     arrow.setActive(false);
     arrow.setVisible(false);
 
     //diminui a vida do zombieSaco com ARROW_DAMAGE
-    robert.receiveDamage(ARROW_DAMAGE);
+    zombieSaco.receiveDamage(ARROW_DAMAGE);
   }
 }
 
-function damageZombieSacoFastBullet(robert, fastbullet) {
+function damageZombieSacoFastBullet(zombieSaco, fastbullet) {
   // Apenas se o zombieGrande e  a fastbullet tiverem vivos
-  if (robert.active === true && fastbullet.active === true) {
+  if (zombieSaco.active === true && fastbullet.active === true) {
    // Remove a Fastbullet 
     var FASTBULLET_DAMAGE = 70;
     fastbullet.setActive(false);
     fastbullet.setVisible(false);
 
     // diminui a vida do zombieSaco com BULLET_DAMAGE
-    robert.receiveDamage(FASTBULLET_DAMAGE);
+    zombieSaco.receiveDamage(FASTBULLET_DAMAGE);
   }
 }
 
-function damageZombieGrandeBullet(dragon, bullet) {
+function damageZombieGrandeBullet(zombieSaco, bullet) {
   // Apenas se o zombieGrande e a bullet tiverem vivos
-  if (dragon.active === true && bullet.active === true) {
+  if (zombieSaco.active === true && bullet.active === true) {
     // Remove a Bullet 
     var BULLET_DAMAGE = 80;
     bullet.setActive(false);
     bullet.setVisible(false);
 
     //diminui a vida do zombieGrande com BULLET_DAMAGE
-    dragon.receiveDamage(BULLET_DAMAGE);
+    zombieSaco.receiveDamage(BULLET_DAMAGE);
   }
 }
-function damageZombieGrandeArrow(dragon, arrow) {
+function damageZombieGrandeArrow(zombieGrande, arrow) {
   // Apenas se o zombieGrande e  a arrowbullet tiverem vivos
-  if (dragon.active === true && arrow.active === true) {
+  if (zombieGrande.active === true && arrow.active === true) {
     // Remove a Arrowbullet 
     var ARROW_DAMAGE = 250;
     arrow.setActive(false);
     arrow.setVisible(false);
 
     //diminui a vida do zombieGrande com ARROW_DAMAGE
-    dragon.receiveDamage(ARROW_DAMAGE);
+    zombieGrande.receiveDamage(ARROW_DAMAGE);
   }
 }
-function damageZombieGrandeFastBullet(dragon, fastbullet) {
+function damageZombieGrandeFastBullet(zombieGrande, fastbullet) {
   // Apenas se o zombieGrande e  a fastbullet tiverem vivos
-  if (dragon.active === true && fastbullet.active === true) {
+  if (zombieGrande.active === true && fastbullet.active === true) {
     // Remove a Fastbullet 
     var FASTBULLET_DAMAGE = 100;
     fastbullet.setActive(false);
     fastbullet.setVisible(false);
 
     // diminui a vida do zombieGrande com BULLET_DAMAGE
-    dragon.receiveDamage(FASTBULLET_DAMAGE);
+    zombieGrande.receiveDamage(FASTBULLET_DAMAGE);
   }
 }
 
@@ -442,7 +442,7 @@ function update(time, delta) {
   //Essas 3 funcoes gera os 3 inimigos conforme o tempo
 
 //Cria um zombieSaco se as condições forem verdadeiras
-  if (time > this.nextEnemy && startgame === true) {
+  if (time > this.nextZombie && startgame === true) {
     var enemy = zombie.get();
 
     if (enemy) {
@@ -452,13 +452,13 @@ function update(time, delta) {
       //coloca o zombie no inicio do caminho
       enemy.startOnPath();
 
-      this.nextEnemy = time + 5000 / (1 + 1.2 * level);
+      this.nextZombie = time + 5000 / (1 + 1.2 * level);
     }
   }
 
   //Cria um zombieSaco se as condições forem verdadeiras
   if (
-    time > this.nextRobert &&
+    time > this.nextZombieSaco &&
     zombieSaco.children.entries.length < 5 &&
     startgame === true &&
     kills > 20
@@ -472,13 +472,13 @@ function update(time, delta) {
       // coloca o zombieSaco no inicio do caminho
       robert.startOnPath();
 
-      this.nextRobert = time + 10000 / (1 + 0.7 * kills);
+      this.nextZombieSaco = time + 10000 / (1 + 0.7 * kills);
     }
   }
 
   //Cria um zombieGrande se as condições forem verdadeiras
   if (
-    time > this.nextDragon &&
+    time > this.nextZombieGrande &&
     zombieGrande.children.entries.length < 1 &&
     startgame === true &&
     kills > 400
@@ -491,7 +491,7 @@ function update(time, delta) {
       // coloca o zombieGrande no inicio do caminho
       dragon.startOnPath();
 
-      this.nextDragon = time + 10000 / (1 + 0.3 * kills);
+      this.nextZombieGrande = time + 10000 / (1 + 0.3 * kills);
     }
   }
 
