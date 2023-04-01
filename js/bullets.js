@@ -4,6 +4,7 @@ var Bullet = new Phaser.Class({
 
         initialize:
 
+        //inclinação da bullet, a velocidade e a duração
         function Bullet (scene)
         {      
             Phaser.GameObjects.Image.call(this, scene, 0, 0, 'bullet');
@@ -15,16 +16,14 @@ var Bullet = new Phaser.Class({
             this.speed = Phaser.Math.GetSpeed(700, 1);
         },
 
-        
-
         fire: function (x, y, angle)
         {
             this.setActive(true);
             this.setVisible(true);
-            //  Bullets fire from the middle of the screen to the given x/y
+            // As Bulltes são disparadas do meio do ecrã para o x/y dado
             this.setPosition(x, y);
             
-        //  we don't need to rotate the bullets as they are round
+        //  Não é ncessário rodar as bullets porque estas são redondas
         //    this.setRotation(angle);
 
             this.dx = Math.cos(angle);
@@ -73,12 +72,12 @@ var Arrow = new Phaser.Class({
         {
             this.setActive(true);
             this.setVisible(true);
-            //  Bullets fire from the middle of the screen to the given x/y
+            // As Bulltes são disparadas do meio do ecrã para o x/y dado
             this.setPosition(x, y);
             
           
-        //  we don't need to rotate the bullets as they are round
-        //    this.setRotation(angle);
+            //  Não é ncessário rodar as bullets porque estas são redondas
+            //    this.setRotation(angle);
 
             this.dx = Math.cos(angle);
             this.dy = Math.sin(angle);
@@ -126,11 +125,11 @@ var FastBullet = new Phaser.Class({
         {
             this.setActive(true);
             this.setVisible(true);
-            //  Bullets fire from the middle of the screen to the given x/y
+            // As Bulltes são disparadas do meio do ecrã para o x/y dado
             this.setPosition(x, y);
             
-        //  we don't need to rotate the bullets as they are round
-        //    this.setRotation(angle);
+            // Não é ncessário rodar as bullets porque estas são redondas
+            // this.setRotation(angle);
 
             this.dx = Math.cos(angle);
             this.dy = Math.sin(angle);

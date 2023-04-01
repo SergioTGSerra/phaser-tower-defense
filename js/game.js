@@ -41,7 +41,7 @@ var arrowSound;
 var fastBulletSound;
 var deathSound;
 
-var ZOMBIE_SPEED = 1 / 30000;
+var ZOMBIE_SPEED = 1 / 3000;
 var ZOMBIESACO_SPEED = 1 / 120000;
 var ZOMBIEGRANDE_SPEED = 1 / 160000;
 
@@ -110,6 +110,7 @@ function preload() {
   this.load.audio("bullet", "/audio/bullet.mp3");
   this.load.audio("fastbullet", "/audio/fastbullet.mp3");
   this.load.audio("death", "/audio/death.mp3");
+  this.load.audio("music", "/audio/Music.mp3");
 }
 
 function create() {
@@ -245,6 +246,11 @@ function create() {
   arrowSound = this.sound.add("arrow");
   deathSound = this.sound.add("death");
   fastBulletSound = this.sound.add("fastbullet");
+
+  //Colocar a musica a dar
+  let music;
+  music = this.sound.add("music", { loop: true });
+  music.play();
 
   this.mKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M);
   this.nKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.N);

@@ -15,7 +15,7 @@ var Zombie = new Phaser.Class({
     receiveDamage: function(damage) {
         this.hp -= damage;           
         
-        // if hp drops below 0 we deactivate this zombie
+        // Quando o hp do zombie baixa para zero o zombie é desativado
         if(this.hp <= 0) {
             this.setActive(false);
             this.setVisible(false); 
@@ -28,14 +28,14 @@ var Zombie = new Phaser.Class({
     },
     startOnPath: function ()
     {   
-        // set the t parameter at the start of the path
+        // Coloca o parametro t no inicio do caminho
         this.follower.t = 0;
         this.hp = 125+(kills*6);
         
-        // get x and y of the given t point
+        // Adquire o valor de x e y do ponto t
         path.getPoint(this.follower.t, this.follower.vec);
         
-        // set the x and y of our zombie to the received from the previous step
+        // Fornece o valor de x e y para o zombie recebido no get anterior
         this.setPosition(this.follower.vec.x, this.follower.vec.y);            
     },
     update: function (time, delta)
@@ -50,16 +50,16 @@ var Zombie = new Phaser.Class({
             return;
         }
         
-        // move the t point along the path, 0 is the start and 0 is the end
+        // Move o ponto t pelo caminho, 0 é o inicio e 0 o fim
         this.follower.t += ZOMBIE_SPEED * delta;
 
-        // get the new x and y coordinates in vec
+        // Adquire as novas coordenadas x e y no vec
         path.getPoint(this.follower.t, this.follower.vec);
         
-        // update zombie x and y to the newly obtained x and y
+        // Atualiza o x e y do zombie para o novos x e y obtidos
         this.setPosition(this.follower.vec.x, this.follower.vec.y);
 
-        // if we have reached the end of the path, remove the zombie
+        // Se o zombie chegar ao fim do caminho, remove-o
         if (this.follower.t >= 1)
         {
             this.setActive(false);
@@ -92,20 +92,20 @@ var ZombieSaco = new Phaser.Class({
 
     startOnPath: function ()
     {   
-        // set the t parameter at the start of the path
+        // Coloca o parametro t no inicio do caminho
         this.follower.t = 0;
         this.hp = 600+(kills*10);
         
-        // get x and y of the given t point
+        // Adquire o valor de x e y do ponto t
         path.getPoint(this.follower.t, this.follower.vec);
         
-        // set the x and y of our zombieSaco to the received from the previous step
+        // Fornece o valor de x e y para o zombie recebido no get anterior
         this.setPosition(this.follower.vec.x, this.follower.vec.y);            
     },
     receiveDamage: function(damage) {
         this.hp -= damage;           
         
-        // if hp drops below 0 we deactivate this zombieSaco
+        // Quando o hp do zombieSaco baixa para zero o zombieSaco é desativado
         if(this.hp <= 0) {
             this.setActive(false);
             this.setVisible(false); 
@@ -128,16 +128,16 @@ var ZombieSaco = new Phaser.Class({
             return;
         }
 
-        // move the t point along the path, 0 is the start and 0 is the end
+        // Move o ponto t pelo caminho, 0 é o inicio e 0 o fim
         this.follower.t += ZOMBIESACO_SPEED * delta;
 
-        // get the new x and y coordinates in vec
+        // Adquire as novas coordenadas x e y no vec
         path.getPoint(this.follower.t, this.follower.vec);
         
-        // update zombieSaco x and y to the newly obtained x and y
+        //Atualiza o x e y do zombie para o novos x e y obtidos
         this.setPosition(this.follower.vec.x, this.follower.vec.y);
 
-        // if we have reached the end of the path, remove the zombieSaco
+        // Se o zombieSaco chegar ao fim do caminho, remove-o
         if (this.follower.t >= 1)
         {
             this.setActive(false);
@@ -165,20 +165,20 @@ var ZombieGrande = new Phaser.Class({
    },
     startOnPath: function ()
    {   
-       // set the t parameter at the start of the path
+       // Coloca o parametro t no inicio do caminho
        this.follower.t = 0;
        this.hp = 15000+(kills*25);
        
-       // get x and y of the given t point
+       // Adquire o valor de x e y do ponto t
        path.getPoint(this.follower.t, this.follower.vec);
        
-       // set the x and y of our zombieSaco to the received from the previous step
+       // Fornece o valor de x e y para o zombie recebido no get anterior
        this.setPosition(this.follower.vec.x, this.follower.vec.y);            
    },
    receiveDamage: function(damage) {
        this.hp -= damage;           
        
-       // if hp drops below 0 we deactivate this zombieSaco
+       // Quando o hp do zombieGrande baixa para zero o zombieSaco é desativado
        if(this.hp <= 0) {
            this.setActive(false);
            this.setVisible(false); 
@@ -199,14 +199,16 @@ var ZombieGrande = new Phaser.Class({
         return;
        }
 
-       // move the t point along the path, 0 is the start and 0 is the end
+       // Move o ponto t pelo caminho, 0 é o inicio e 0 o fim
        this.follower.t += ZOMBIEGRANDE_SPEED * delta;
-        // get the new x and y coordinates in vec
+
+        // Adquire as novas coordenadas x e y no vec
        path.getPoint(this.follower.t, this.follower.vec);
        
-       // update zombieSaco x and y to the newly obtained x and y
+       //Atualiza o x e y do zombie para o novos x e y obtidos
        this.setPosition(this.follower.vec.x, this.follower.vec.y);
-        // if we have reached the end of the path, remove the zombieGrande
+
+        // Se o zombieGrande chegar ao fim do caminho, remove-o
        if (this.follower.t >= 1)
        {
            this.setActive(false);

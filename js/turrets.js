@@ -14,8 +14,7 @@ var Turret = new Phaser.Class({
         
     },
 
-    
-    // we will place the turret according to the grid
+    // Coloca a planta de acordo com a grelha
     place: function(i, j) {            
         this.y = i * 32 + 32/2;
         this.x = j * 32 + 32/2;
@@ -47,7 +46,7 @@ var Turret = new Phaser.Class({
     },
     update: function (time, delta)
     {
-        // time to shoot, turret.speed interval for bullets
+        // tempo de disparo e intervalo de speed entra cada disparo
         if(time > this.nextTic) {
             this.fire();
             this.nextTic = time + 900;
@@ -77,7 +76,7 @@ var ArrowTurret = new Phaser.Class({
     },
 
     
-    // we will place the turret according to the grid
+    // Coloca a planta de acordo com a grelha
     place: function(i, j) {            
         this.y = i * 32 + 32/2;
         this.x = j * 32 + 32/2;
@@ -113,7 +112,7 @@ var ArrowTurret = new Phaser.Class({
 
     update: function (time, delta)
     {
-        // time to shoot, turret.speed interval for Arrows
+        // tempo de disparo e intervalo de speed entra cada disparo
         if(time > this.nextTic) {
             this.fire();
             this.nextTic = time + 1000;
@@ -140,7 +139,7 @@ var FastTurret = new Phaser.Class({
     },
 
     
-    // we will place the turret according to the grid
+    // Coloca a planta de acordo com a grelha
     place: function(i, j) {            
         this.y = i * 32 + 32/2;
         this.x = j * 32 + 32/2;
@@ -174,7 +173,7 @@ var FastTurret = new Phaser.Class({
     },
     update: function (time, delta)
     {
-        // time to shoot, turret.speed interval for bullets
+        // tempo de disparo e intervalo de speed entra cada disparo
         if(time > this.nextTic) {
             this.fire();
             this.nextTic = time + 100;
@@ -186,7 +185,7 @@ var FastTurret = new Phaser.Class({
 
 
 
-// aiming turrets at zombie
+// Direciona as turrets para o zombie
 function getZombie(x, y, distance) {
     var enemyUnits = zombie.getChildren();
     for(var i = 0; i < enemyUnits.length; i++) {      
@@ -195,7 +194,7 @@ function getZombie(x, y, distance) {
     }
     return false;
 } 
-//aiming turrets at zombieSaco
+// Direciona as turrets para o zombieSaco
 function getZombieSaco(x, y, distance) {
     var robertUnits = zombieSaco.getChildren();
     for(var i = 0; i < robertUnits.length; i++) {      
@@ -205,7 +204,7 @@ function getZombieSaco(x, y, distance) {
     return false;
 } 
 
-//aiming turrets at zombieGrande
+//Direciona as turrets para o zombieGrande
 function getZombieGrande(x, y, distance) {
     var dragonUnits = zombieGrande.getChildren();
     for(var i = 0; i < dragonUnits.length; i++) {      
@@ -216,7 +215,7 @@ function getZombieGrande(x, y, distance) {
 } 
 
 
-//place arrow turrets
+//coloca arrow turrets
 function placeTurret2(pointer) {
     var i = Math.floor(pointer.y/32);
     var j = Math.floor(pointer.x/32);
@@ -234,7 +233,7 @@ function placeTurret2(pointer) {
     }
 }
 
-//place bullet turrets
+//coloca bullet turrets
 function placeTurret(pointer) {
     var i = Math.floor(pointer.y/32);
     var j = Math.floor(pointer.x/32);
@@ -251,7 +250,7 @@ function placeTurret(pointer) {
     }
 }
 
-//place fast turrets
+//coloca fast turrets
 function placeTurret3(pointer) {
     var i = Math.floor(pointer.y/32);
     var j = Math.floor(pointer.x/32);
