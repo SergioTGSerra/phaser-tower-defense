@@ -86,7 +86,7 @@ var map =  [[  0, 0, 0, 0, -1, -1, -1, -1, -1,  0, -1, -1, -1, -1,  0,  0,  0,  
             
 
 function preload() {
-  // load images
+  // carrega imagens
   this.load.image("mapOne", "assets/updatedMap.png");
   this.load.image("mapTwo", "assets/updatedMap_1.png");
   this.load.image("bullet", "assets/peashot.png");
@@ -105,7 +105,7 @@ function preload() {
   this.load.image("gameOver", "assets/Gameover.png");
   this.load.image("gameWin", "assets/GameWin.png");
 
-  // load audio
+  // carrega audio
   this.load.audio("arrow", "/audio/arrow.mp3");
   this.load.audio("bullet", "/audio/bullet.mp3");
   this.load.audio("fastbullet", "/audio/fastbullet.mp3");
@@ -118,13 +118,13 @@ function create() {
   mapTwo = this.add.image(800, 600, "mapTwo");
   mapOne.setVisible(true);
   mapTwo.setVisible(false);
-  // this graphics element is only for visualization,
-  // its not related to our path
+  // o elemento graphics é apenas para visualização, 
+  //não está relacionado com o nosso caminho
   var graphics = this.add.graphics();
   drawGrid(graphics);
 
-  // the path for our zombie
-  // parameters are the start x and y of our paths
+  // o caminho para o zombie
+  // os parametros são o x e o y inicias dos nossos caminhos
   path = this.add.path(200, -25);
   path.lineTo(200, 300);
   path.lineTo(400, 300);
@@ -142,12 +142,13 @@ function create() {
   path.lineTo(1400, 300);
   path.lineTo(1400, -25);
 
+  //adiciona a barra ao fundo
   this.add.image(400, 1180, "uibar");
 
   graphics.lineStyle(3, 0xffffff, 1);
-  //visualize the path
+  //visauliza o caminho
 
-  //zombie
+  //Este código permite que os zombies possão ser usados em deteção de colisões e outros tipos de interações físicas
   zombie = this.physics.add.group({ classType: Zombie, runChildUpdate: true });
   this.nextEnemy = 0;
   zombieSaco = this.physics.add.group({ classType: ZombieSaco, runChildUpdate: true });
@@ -155,14 +156,12 @@ function create() {
   zombieGrande = this.physics.add.group({ classType: ZombieGrande, runChildUpdate: true });
   this.nextDragon = 0;
 
-  //turrets
+  //Agrupa cada tipo de planta num grupo para facilitar o melhoramento e a renderização
   turrets = this.add.group({ classType: Turret, runChildUpdate: true });
-  arrowTurrets = this.add.group({
-    classType: ArrowTurret,
-    runChildUpdate: true,
-  });
+  arrowTurrets = this.add.group({classType: ArrowTurret, runChildUpdate: true});
   fastTurrets = this.add.group({ classType: FastTurret, runChildUpdate: true });
 
+  //Cria o botão da primeira planta
   turretOneButton = this.add.image(40, 1170, "towerOneButton");
   turretOneButton.setInteractive();
   turretOneButton.on("pointerdown", () => {
@@ -175,6 +174,7 @@ function create() {
   });
   this.input.on("pointerdown", placeTurret);
 
+  //Cria o botão da segunda planta
   turretTwoButton = this.add.image(120, 1170, "towerTwoButton");
   turretTwoButton.setInteractive();
   turretTwoButton.on("pointerdown", () => {
@@ -187,6 +187,7 @@ function create() {
   });
   this.input.on("pointerdown", placeTurret2);
 
+  //Cria o botão da terceira planta 
   turretThreeButton = this.add.image(200, 1170, "towerThreeButton");
   turretThreeButton.setInteractive();
   turretThreeButton.on("pointerdown", () => {
@@ -199,23 +200,24 @@ function create() {
   });
   this.input.on("pointerdown", placeTurret3);
 
+  //Este código permite que os projeteis possão ser usados em deteção de colisões e outros tipos de interações físicas
   bullets = this.physics.add.group({ classType: Bullet, runChildUpdate: true });
   arrows = this.physics.add.group({ classType: Arrow, runChildUpdate: true });
-  fastbullets = this.physics.add.group({
-    classType: FastBullet,
-    runChildUpdate: true,
-  });
+  fastbullets = this.physics.add.group({classType: FastBullet, runChildUpdate: true});
 
-  this.physics.add.overlap(zombie, bullets, damageEnemyBullet);
-  this.physics.add.overlap(zombie, arrows, damageEnemyArrow);
-  this.physics.add.overlap(zombie, fastbullets, damageEnemyFastBullet);
-  this.physics.add.overlap(zombieSaco, bullets, damageRobertBullet);
-  this.physics.add.overlap(zombieSaco, arrows, damageRobertArrow);
-  this.physics.add.overlap(zombieSaco, fastbullets, damageRobertFastBullet);
-  this.physics.add.overlap(zombieGrande, bullets, damageDragonBullet);
-  this.physics.add.overlap(zombieGrande, arrows, damageDragonArrow);
-  this.physics.add.overlap(zombieGrande, fastbullets, damageDragonFastBullet);
+  //Este código cria a deteção de colisão entre um tipo de zombie e uma bullet
+  //Quando a colisão entre estes acontece a função de dano (Ex: damageZombieBullet) é chamada
+  this.physics.add.overlap(zombie, bullets, damageZombieBullet);
+  this.physics.add.overlap(zombie, arrows, damageZombieArrow);
+  this.physics.add.overlap(zombie, fastbullets, damageZombieFastBullet);
+  this.physics.add.overlap(zombieSaco, bullets, damageZombieSacoBullet);
+  this.physics.add.overlap(zombieSaco, arrows, damageZombieSacoArrow);
+  this.physics.add.overlap(zombieSaco, fastbullets, damageZombieSacoFastBullet);
+  this.physics.add.overlap(zombieGrande, bullets, damageZombieGrandeBullet);
+  this.physics.add.overlap(zombieGrande, arrows, damageZombieGrandeArrow);
+  this.physics.add.overlap(zombieGrande, fastbullets, damageZombieGrandeFastBullet);
 
+  //Cria os textos para a quantidade de gold, life, kills e o nivel do jogador
   goldText = this.add.text(700, 1155, "Gold: " + gold, {
     fontSize: "28px",
     fill: "#FFD700",
@@ -233,6 +235,7 @@ function create() {
     fill: "#ff8200",
   });
 
+  //Cria o botão inicial
   const startButton = this.add.image(800, 600, "startButton");
   startButton.setInteractive();
   startButton.on("pointerdown", function () {
@@ -240,130 +243,131 @@ function create() {
     startButton.destroy();
   });
 
-  // add sounds
+  // adiciona sons sounds
   bulletSound = this.sound.add("bullet");
   arrowSound = this.sound.add("arrow");
   deathSound = this.sound.add("death");
   fastBulletSound = this.sound.add("fastbullet");
 
+  //Cria os botões que serão usados nos cheats
   this.mKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M);
   this.nKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.N);
 
 }
 
-//Damage creep functions
+//Funções de dano nos inimigos
 
-function damageEnemyBullet(enemy, bullet) {
-  // only if both enemy and bullet are alive
+function damageZombieBullet(enemy, bullet) {
+  // Apenas se o zombie e a bullet tiverem vivos
   if (enemy.active === true && bullet.active === true) {
-    // we remove the bullet right away
+    // Remove a bullet
     var BULLET_DAMAGE = 125;
     bullet.setActive(false);
     bullet.setVisible(false);
 
-    // decrease the enemy hp with BULLET_DAMAGE
+    // diminui o dano do zombie com BULLET_DAMAGE
     enemy.receiveDamage(BULLET_DAMAGE);
   }
 }
 
-function damageEnemyArrow(enemy, arrow) {
-  // only if both enemy and bullet are alive
+function damageZombieArrow(enemy, arrow) {
+  // Apenas se o zombie e a arrowbullet tiverem vivos
   if (enemy.active === true && arrow.active === true) {
-    // we remove the bullet right away
+    // Remove a Arrowbullet
     var ARROW_DAMAGE = 200;
     arrow.setActive(false);
     arrow.setVisible(false);
 
-    // decrease the enemy hp with BULLET_DAMAGE
+    //diminui a vida do zombie com ARROW_DAMAGE
     enemy.receiveDamage(ARROW_DAMAGE);
   }
 }
 
-function damageEnemyFastBullet(enemy, fastbullet) {
-  // only if both enemy and bullet are alive
+function damageZombieFastBullet(enemy, fastbullet) {
+  // Apenas se o zombie e a fastbullet tiverem vivos
   if (enemy.active === true && fastbullet.active === true) {
-    // we remove the bullet right away
+    /// Remove a Fastbullet 
     var FASTBULLET_DAMAGE = 70;
     fastbullet.setActive(false);
     fastbullet.setVisible(false);
 
-    // decrease the enemy hp with BULLET_DAMAGE
+    // diminui a vida do zombie com BULLET_DAMAGE
     enemy.receiveDamage(FASTBULLET_DAMAGE);
   }
 }
 
-function damageRobertBullet(robert, bullet) {
-  // only if both robert and bullet are alive
+function damageZombieSacoBullet(robert, bullet) {
+  // Apenas se o zombieSaco e a bullet tiverem vivos
   if (robert.active === true && bullet.active === true) {
-    // we remove the bullet right away
+    // Remove a bullet
     var BULLET_DAMAGE = 80;
     bullet.setActive(false);
     bullet.setVisible(false);
 
-    // decrease the robert hp with BULLET_DAMAGE
+    // diminui a vida do zombieSaco com BULLET_DAMAGE
     robert.receiveDamage(BULLET_DAMAGE);
   }
 }
 
-function damageRobertArrow(robert, arrow) {
-  // only if both robert and bullet are alive
+function damageZombieSacoArrow(robert, arrow) {
+  // Apenas se o zombieSaco e  a arrowbullet tiverem vivos
   if (robert.active === true && arrow.active === true) {
-    // we remove the bullet right away
+    // Remove a Arrowbullet
     var ARROW_DAMAGE = 350;
     arrow.setActive(false);
     arrow.setVisible(false);
 
-    // decrease the robert hp with BULLET_DAMAGE
+    //diminui a vida do zombieSaco com ARROW_DAMAGE
     robert.receiveDamage(ARROW_DAMAGE);
   }
 }
 
-function damageRobertFastBullet(robert, fastbullet) {
-  // only if both robert and bullet are alive
+function damageZombieSacoFastBullet(robert, fastbullet) {
+  // Apenas se o zombieGrande e  a fastbullet tiverem vivos
   if (robert.active === true && fastbullet.active === true) {
-    // we remove the bullet right away
+   // Remove a Fastbullet 
     var FASTBULLET_DAMAGE = 70;
     fastbullet.setActive(false);
     fastbullet.setVisible(false);
 
-    // decrease the robert hp with BULLET_DAMAGE
+    // diminui a vida do zombieSaco com BULLET_DAMAGE
     robert.receiveDamage(FASTBULLET_DAMAGE);
   }
 }
 
-function damageDragonBullet(dragon, bullet) {
-  // only if both robert and bullet are alive
+function damageZombieGrandeBullet(dragon, bullet) {
+  // Apenas se o zombieGrande e a bullet tiverem vivos
   if (dragon.active === true && bullet.active === true) {
-    // we remove the bullet right away
+    // Remove a Bullet 
     var BULLET_DAMAGE = 80;
     bullet.setActive(false);
     bullet.setVisible(false);
 
-    // decrease the robert hp with BULLET_DAMAGE
+    //diminui a vida do zombieGrande com BULLET_DAMAGE
     dragon.receiveDamage(BULLET_DAMAGE);
   }
 }
-function damageDragonArrow(dragon, arrow) {
-  // only if both robert and bullet are alive
+function damageZombieGrandeArrow(dragon, arrow) {
+  // Apenas se o zombieGrande e  a arrowbullet tiverem vivos
   if (dragon.active === true && arrow.active === true) {
-    // we remove the bullet right away
+    // Remove a Arrowbullet 
     var ARROW_DAMAGE = 250;
     arrow.setActive(false);
     arrow.setVisible(false);
 
-    // decrease the robert hp with BULLET_DAMAGE
+    //diminui a vida do zombieGrande com ARROW_DAMAGE
     dragon.receiveDamage(ARROW_DAMAGE);
   }
 }
-function damageDragonFastBullet(dragon, fastbullet) {
-  // only if both robert and bullet are alive
+function damageZombieGrandeFastBullet(dragon, fastbullet) {
+  // Apenas se o zombieGrande e  a fastbullet tiverem vivos
   if (dragon.active === true && fastbullet.active === true) {
-    // we remove the bullet right away
+    // Remove a Fastbullet 
     var FASTBULLET_DAMAGE = 100;
     fastbullet.setActive(false);
     fastbullet.setVisible(false);
 
-    // decrease the robert hp with BULLET_DAMAGE
+    // diminui a vida do zombieGrande com BULLET_DAMAGE
     dragon.receiveDamage(FASTBULLET_DAMAGE);
   }
 }
@@ -395,6 +399,7 @@ function update(time, delta) {
     lifeText.setText('Life:' + life);
   }
 
+  //A variavel time apenas começa quando o jogo começa 
   if (!startgame){
     time = 0;
   }
@@ -436,6 +441,7 @@ function update(time, delta) {
 
   //Essas 3 funcoes gera os 3 inimigos conforme o tempo
 
+//Cria um zombieSaco se as condições forem verdadeiras
   if (time > this.nextEnemy && startgame === true) {
     var enemy = zombie.get();
 
@@ -443,14 +449,14 @@ function update(time, delta) {
       enemy.setActive(true);
       enemy.setVisible(true);
 
-      //coloca o zombieSaco no inicio do caminho
+      //coloca o zombie no inicio do caminho
       enemy.startOnPath();
 
       this.nextEnemy = time + 5000 / (1 + 1.2 * level);
     }
   }
 
-  //Cria um zombieGrande se as condições forem verdadeiras
+  //Cria um zombieSaco se as condições forem verdadeiras
   if (
     time > this.nextRobert &&
     zombieSaco.children.entries.length < 5 &&
