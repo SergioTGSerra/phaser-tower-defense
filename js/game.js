@@ -87,30 +87,30 @@ var map =  [[  0, 0, 0, 0, -1, -1, -1, -1, -1,  0, -1, -1, -1, -1,  0,  0,  0,  
 
 function preload() {
   // carrega imagens
-  this.load.image("mapOne", "../assets/updatedMap.png");
-  this.load.image("mapTwo", "../assets/updatedMap_1.png");
-  this.load.image("bullet", "../assets/peashot.png");
-  this.load.image("arrow", "../assets/spike.png");
-  this.load.image("tower", "../assets/pea.png");
-  this.load.image("tower2", "../assets/cattail.png");
-  this.load.image("tower3", "../assets/superpea.png");
-  this.load.image("zombie", "../assets/zombie.png");
-  this.load.image("zombieSaco", "../assets/zombie2.png");
-  this.load.image("zombieGrande", "../assets/zombie3.png");
-  this.load.image("towerOneButton", "../assets/peaButton.png");
-  this.load.image("towerTwoButton", "../assets/cattailButton.png");
-  this.load.image("towerThreeButton", "../assets/superpeaButton.png");
-  this.load.image("uibar", "../assets/Rectangle.png");
-  this.load.image("startButton", "../assets/titlescreen.png");
-  this.load.image("gameOver", "../assets/Gameover.png");
-  this.load.image("gameWin", "../assets/GameWin.png");
+  this.load.image("mapOne", "assets/updatedMap.png");
+  this.load.image("mapTwo", "assets/updatedMap_1.png");
+  this.load.image("bullet", "assets/peashot.png");
+  this.load.image("arrow", "assets/spike.png");
+  this.load.image("tower", "assets/pea.png");
+  this.load.image("tower2", "assets/cattail.png");
+  this.load.image("tower3", "assets/superpea.png");
+  this.load.image("zombie", "assets/zombie.png");
+  this.load.image("zombieSaco", "assets/zombie2.png");
+  this.load.image("zombieGrande", "assets/zombie3.png");
+  this.load.image("towerOneButton", "assets/peaButton.png");
+  this.load.image("towerTwoButton", "assets/cattailButton.png");
+  this.load.image("towerThreeButton", "assets/superpeaButton.png");
+  this.load.image("uibar", "assets/Rectangle.png");
+  this.load.image("startButton", "assets/titlescreen.png");
+  this.load.image("gameOver", "assets/Gameover.png");
+  this.load.image("gameWin", "assets/GameWin.png");
 
   // carrega audio
-  this.load.audio("arrow", "../audio/arrow.mp3");
-  this.load.audio("bullet", "../audio/bullet.mp3");
-  this.load.audio("fastbullet", "../audio/fastbullet.mp3");
-  this.load.audio("death", "../audio/death.mp3");
-  this.load.audio("music", "../audio/Music.mp3");
+  this.load.audio("arrow", "audio/arrow.mp3");
+  this.load.audio("bullet", "audio/bullet.mp3");
+  this.load.audio("fastbullet", "audio/fastbullet.mp3");
+  this.load.audio("death", "audio/death.mp3");
+  this.load.audio("music", "audio/Music.mp3");
 }
 
 function create() {
