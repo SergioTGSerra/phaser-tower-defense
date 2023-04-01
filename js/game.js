@@ -41,7 +41,7 @@ var arrowSound;
 var fastBulletSound;
 var deathSound;
 
-var ZOMBIE_SPEED = 1 / 3000;
+var ZOMBIE_SPEED = 1 / 30000;
 var ZOMBIESACO_SPEED = 1 / 120000;
 var ZOMBIEGRANDE_SPEED = 1 / 160000;
 
