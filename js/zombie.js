@@ -24,6 +24,7 @@ var Zombie = new Phaser.Class({
             kills += 1;
             killCounter.setText("Kills: " + kills)
             deathSound.play();
+            deathSound.setVolume(0.4);
         }
     },
     startOnPath: function ()
@@ -114,6 +115,7 @@ var ZombieSaco = new Phaser.Class({
             kills += 1;
             killCounter.setText("Kills: " + kills)
             deathSound.play();
+            deathSound.setVolume(0.4);
         }
     },
     update: function (time, delta)
@@ -183,7 +185,9 @@ var ZombieGrande = new Phaser.Class({
            this.setActive(false);
            this.setVisible(false); 
            gold += 50;
-           goldText.setText('Gold: '+ gold);    
+           goldText.setText('Gold: '+ gold);
+           deathSound.play(); 
+           deathSound.setVolume(0.4);  
        }
    },
    update: function (time, delta)

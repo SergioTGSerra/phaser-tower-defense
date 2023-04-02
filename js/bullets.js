@@ -31,6 +31,7 @@ var Bullet = new Phaser.Class({
 
             this.lifespan = 550;
             bulletSound.play();
+            bulletSound.setVolume(0.3);
         },
 
         update: function (time, delta)
@@ -84,6 +85,7 @@ var Arrow = new Phaser.Class({
 
             this.lifespan = 6000;
             arrowSound.play();
+            arrowSound.setVolume(0.5);
         },
 
         update: function (time, delta)
@@ -136,6 +138,7 @@ var FastBullet = new Phaser.Class({
 
             this.lifespan = 500;
             fastBulletSound.play();
+            fastBulletSound.setVolume(0.3);
         },
 
         update: function (time, delta)

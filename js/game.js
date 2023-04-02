@@ -41,9 +41,9 @@ var arrowSound;
 var fastBulletSound;
 var deathSound;
 
-var ZOMBIE_SPEED = 1 / 30000;
-var ZOMBIESACO_SPEED = 1 / 120000;
-var ZOMBIEGRANDE_SPEED = 1 / 160000;
+var ZOMBIE_SPEED; 
+var ZOMBIESACO_SPEED;
+var ZOMBIEGRANDE_SPEED; 
 
 var map =  [[  0, 0, 0, 0, -1, -1, -1, -1, -1,  0, -1, -1, -1, -1,  0,  0,  0,  0,  0,  0,  0, 0,  0,  0,  0,  0,  0,  0, 0,  0,  0,  0,  0,  0,  0,  0, -1, -1, -1, -1,  0, -1, -1, -1, -1, -1,  0,  0,  0, 0],
             [  0, 0, 0, 0, -1, -1, -1, -1, -1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 0,  0,  0,  0,  0,  0,  0, 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, -1, -1, -1, -1, -1,  0,  0,  0, 0],
@@ -111,6 +111,8 @@ function preload() {
   this.load.audio("fastbullet", "audio/fastbullet.mp3");
   this.load.audio("death", "audio/death.mp3");
   this.load.audio("music", "audio/Music.mp3");
+  this.load.audio("WinSound", "audio/WinningSound.mp3");
+  this.load.audio("LoseSound", "audio/LosingSound.mp3");
 }
 
 function create() {
@@ -249,16 +251,22 @@ function create() {
   arrowSound = this.sound.add("arrow");
   deathSound = this.sound.add("death");
   fastBulletSound = this.sound.add("fastbullet");
+  winSound = this.sound.add("WinSound");
+  loseSound = this.sound.add("LoseSound");
+
+  //Estes sons tem que ser iniciados e pausados par que no update funcionem
+  winSound.play();
+  winSound.pause();
+  loseSound.play();
+  loseSound.pause();
 
   //Colocar a musica a dar
-  let music;
-  music = this.sound.add("music", { loop: true });
+  music = this.sound.add("music");
   music.play();
 
   //Cria os botões que serão usados nos cheats
   this.mKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M);
   this.nKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.N);
-
 }
 
 //Funções de dano nos inimigos
@@ -412,6 +420,8 @@ function update(time, delta) {
 
   //Se as vidas acabarem gameover = true entra no if
   if (gameOver) {
+    music.stop();
+    loseSound.resume();
     const gameOverButton = this.add.image(800, 600, "gameOver");
     mapOne.tint = 0xbc0505;
     gameOverButton.setInteractive();
@@ -425,11 +435,14 @@ function update(time, delta) {
 
   //Se ganha o jogo aparece mensagem win
   if (gameWin) {
-    const gameWinButton = this.add.image(800, 600, "gameWin");
+    music.stop();
+    winSound.resume();
+    var gameWinButton = this.add.image(800, 600, "gameWin");
     mapOne.tint = 0x00ff00;
     gameWinButton.setInteractive();
     gameWinButton.on("pointerdown", function () {
       mapOne.tint = 0x00ff00;
+      gameWinButton.off("pointerdown");
       gameWinButton.destroy();
       location.reload();
       return;
@@ -467,7 +480,7 @@ function update(time, delta) {
     time > this.nextZombieSaco &&
     zombieSaco.children.entries.length < 5 &&
     startgame === true &&
-    kills > 20
+    level > 2
   ) {
     var robert = zombieSaco.get();
 
@@ -487,7 +500,7 @@ function update(time, delta) {
     time > this.nextZombieGrande &&
     zombieGrande.children.entries.length < 1 &&
     startgame === true &&
-    kills > 400
+    level > 5
   ) {
     var dragon = zombieGrande.get();
 
@@ -520,16 +533,26 @@ function update(time, delta) {
       zombieGrande.children.entries.splice(i, 1);
     }
   }
-  
+
+  //Quando fica de noite os zombies ficam mais rápidos
+  if (level%5 == 0){
+    ZOMBIE_SPEED = 1 / 20000;
+    ZOMBIESACO_SPEED = 1 / 110000;
+    ZOMBIEGRANDE_SPEED = 1 / 150000;
+  } else {
+    ZOMBIE_SPEED = 1 / 30000;
+    ZOMBIESACO_SPEED = 1 / 120000;
+    ZOMBIEGRANDE_SPEED = 1 / 160000;
+  }
 
   //Define o nivel do jogo
-  if(startgame && level < 20 && !gameOver && !gameWin){
+  if(startgame && level < 11 && !gameOver && !gameWin){
     level = Math.ceil(time / 30000);
     levelText.setText("Level: " + level);
   }
 
   if (life <= 0) gameOver = true;
-  if (level == 20) gameWin = true;
+  if (level == 11) gameWin = true;
 }
 
 //Estas 3 funções abaixo são chamdas no ficheiro turrets.js
