@@ -261,7 +261,7 @@ function create() {
   loseSound.pause();
 
   //Colocar a musica a dar
-  music = this.sound.add("music");
+  music = this.sound.add("music", {loop:true});
   music.play();
 
   //Cria os botões que serão usados nos cheats
